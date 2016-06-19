@@ -1,3 +1,5 @@
+/*Program is used for basic quaternion math; function definitions are located in the quaternion.h header file*/
+
 #include <stdio.h>
 #include <quaternion.h>
 
