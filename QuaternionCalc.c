@@ -4,12 +4,14 @@
 int main(){
 	char menuSelect;
 	quat a, b, r;
+	double mat[3][3];
 	while (1){
 		printf("Select an option below: \n");
 		printf("'m' to multiply 2 quaternions\n");
 		printf("'r' to rotate a vector by a quaternion\n");
 		printf("'n' to calculate the norm of a quaternion\n");
 		printf("'c' to calculate the conjugate of a quaternion\n");
+		printf("'z' to convert from matrix to quaternion\n");
 		printf("'q' to quit the program\n\n");
 		scanf("%s", &menuSelect);
 		switch(menuSelect){
@@ -46,6 +48,15 @@ int main(){
 			scanf("%lf,%lf,%lf,%lf",&(a.q0),&(a.q1),&(a.q2),&(a.q3));
 			r = quat_conj(a);
 			printf("Conjugate:\n");
+			printf("%.2f + %.2fi + %.2fj + %.2fk\n\n", (r.q0),(r.q1),(r.q2),(r.q3));
+			continue;
+		case 'z':
+			for (int i = 0; i < 3; i++){
+			printf("Enter row %d separating numbers with commas\n",i+1);
+			scanf("%lf, %lf, %lf", &mat[i][0], &mat[i][1], &mat[i][2]);
+			}
+			r = mat2quat(mat);
+			printf("Quaternion Conversion:\n");
 			printf("%.2f + %.2fi + %.2fj + %.2fk\n\n", (r.q0),(r.q1),(r.q2),(r.q3));
 			continue;
 		case 'q':

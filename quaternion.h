@@ -12,6 +12,7 @@ quat quat_mult(quat a, quat b);
 double quat_norm(quat a);
 quat quat_inv(quat a);
 quat rotVec(quat a, quat b);
+quat mat2quat(double mat[3][3]);
 
 /*Calculates the conjugate of a quaternion*/
 quat quat_conj(quat a){
@@ -56,5 +57,14 @@ quat rotVec(quat a, quat b){
 	u.q2 = a.q2/quat_norm(a);
 	u.q3 = a.q3/quat_norm(a);
 	r = quat_mult(quat_mult(u,b), quat_inv(a));
+	return r;
+}
+/*Converts 3x3 rotation matrix to a quaternion*/
+quat mat2quat(double mat[3][3]){
+	quat r;
+	r.q0 = 0.5*sqrt(1+mat[0][0]+mat[1][1]+mat[2][2]);
+	r.q1 = (mat[2][1]-mat[1][2])/4*r.q0;
+	r.q2 = (mat[0][2]-mat[2][0])/4*r.q0;
+	r.q3 = (mat[1][0]-mat[0][1])/4*r.q0;
 	return r;
 }
